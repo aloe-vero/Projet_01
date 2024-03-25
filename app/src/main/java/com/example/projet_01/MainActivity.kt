@@ -12,9 +12,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -79,23 +81,31 @@ fun DisplayWeather(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(30.dp))
         ListCity()
         Spacer(Modifier.height(60.dp))
-        Text(
-            text = currentDate,
-            modifier = modifier,
-            style = MaterialTheme.typography.displayMedium,
-        )
-        Spacer(Modifier.height(10.dp))
+
+Row() {
+    Column() {
+            Text(
+                    text = currentDate,
+                    modifier = modifier,
+                    style = MaterialTheme.typography.displayMedium,
+                )
+                Text(
+                    text = "Montréal",
+                    modifier = modifier,
+                    style = MaterialTheme.typography.displayMedium,
+                )
+        }
+    Spacer(Modifier.height(20.dp))
+    Column (){
+
         Text(
             text = "-10°C",
-            modifier = modifier,
+            modifier = modifier.padding(10.dp),
             style = MaterialTheme.typography.displayMedium,
         )
-        Spacer(Modifier.height(5.dp))
-        Text(
-            text = "Montréal",
-            modifier = modifier,
-            style = MaterialTheme.typography.displayMedium,
-        )
+    }
+
+        }
         Spacer(Modifier.height(20.dp))
         IconWeather()
         Spacer(Modifier.height(10.dp))
@@ -196,6 +206,7 @@ fun ListCity(modifier: Modifier = Modifier) {
             }
         }
     }
+
 }
 
 @RequiresApi(Build.VERSION_CODES.M)
