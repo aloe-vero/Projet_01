@@ -190,11 +190,13 @@ fun ListCity(modifier: Modifier = Modifier) {
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = ouvert.value)
             }
-            )
+        )
         ExposedDropdownMenu(
             expanded = ouvert.value,
             onDismissRequest = { ouvert.value = false
-            }
+            },
+            //modifier couleur
+            Modifier.background(color = Color.Yellow)
         ) {
             liste.forEach { selectionOption ->
                 DropdownMenuItem(
@@ -202,7 +204,7 @@ fun ListCity(modifier: Modifier = Modifier) {
                     onClick = {
                         selectedOptionText.value = selectionOption
                         ouvert.value = false
-                    })
+                    },)
             }
         }
     }
