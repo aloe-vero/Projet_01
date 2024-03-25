@@ -10,6 +10,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,14 +18,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +40,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -81,24 +89,29 @@ fun DisplayWeather(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(60.dp))
         Text(
             text = currentDate,
-            modifier = modifier
+            modifier = modifier,
+            style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(10.dp))
         Text(
             text = "-10°C",
-            modifier = modifier
+            modifier = modifier,
+            style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(5.dp))
         Text(
             text = "Montréal",
-            modifier = modifier
+            modifier = modifier,
+            style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(20.dp))
         IconWeather()
         Spacer(Modifier.height(10.dp))
         Text(
             text = "peu nuageux",
-            modifier = modifier
+            modifier = modifier,
+            style = MaterialTheme.typography.displaySmall,
+
         )
     }
 }
@@ -116,7 +129,8 @@ fun SearchBar(modifier: Modifier = Modifier){
         modifier = Modifier.width(350.dp),
         value = "",
         onValueChange = {/*TODO*/},
-        label = { Text(text = "Ville: ")},
+        label = { Text(text = "Ville: ",
+            style = MaterialTheme.typography.bodyMedium,)},
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
