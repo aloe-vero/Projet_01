@@ -196,7 +196,7 @@ fun ListCity(modifier: Modifier = Modifier) {
             onDismissRequest = { ouvert.value = false
             },
             //modifier couleur
-            Modifier.background(color = Color.Yellow)
+            Modifier.background(color = Color.Blue)
         ) {
             liste.forEach { selectionOption ->
                 DropdownMenuItem(
