@@ -128,7 +128,7 @@ fun SearchBar(modifier: Modifier = Modifier){
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         ),
         leadingIcon = {
            Icon(
@@ -176,7 +176,7 @@ fun ListCity(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(20.dp),
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             ),
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = ouvert.value)
@@ -197,9 +197,8 @@ fun ListCity(modifier: Modifier = Modifier) {
             }
         }
     }
-}*/
-
-
+}
+*/
 @RequiresApi(Build.VERSION_CODES.M)
 @Preview(showBackground = true)
 @Composable
