@@ -42,6 +42,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.projet_01.ui.theme.Projet_01Theme
+import com.example.projet_01.ui.theme.WeatherScreen
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    DisplayWeather()
+                    WeatherScreen()
                 }
             }
         }
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
 }
 
 //Englobe tout l'affichage de l'application
-@RequiresApi(Build.VERSION_CODES.M)
+/*@RequiresApi(Build.VERSION_CODES.M)
 @Composable
 fun DisplayWeather(modifier: Modifier = Modifier) {
     val currentDate: String = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(Date())
@@ -127,7 +128,7 @@ fun SearchBar(modifier: Modifier = Modifier){
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
         ),
         leadingIcon = {
            Icon(
@@ -175,7 +176,7 @@ fun ListCity(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(20.dp),
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+                unfocusedIndicatorColor = Color.Transparent,
             ),
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = ouvert.value)
@@ -196,13 +197,14 @@ fun ListCity(modifier: Modifier = Modifier) {
             }
         }
     }
-}
+}*/
+
 
 @RequiresApi(Build.VERSION_CODES.M)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Projet_01Theme {
-        DisplayWeather()
+        WeatherScreen()
     }
 }
