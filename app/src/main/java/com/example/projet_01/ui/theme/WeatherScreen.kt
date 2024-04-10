@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.example.projet_01.R
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -168,10 +169,7 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
                style = MaterialTheme.typography.displayMedium,
            )
            Spacer(Modifier.height(20.dp))
-           Image(
-               painter = painterResource(R.drawable.icon_peu_nuageux),
-               contentDescription = "weather"
-           )
+           AffImage();
            Spacer(Modifier.height(10.dp))
            Text(
                text = weatherUiState.value.weather[0].description,
@@ -181,4 +179,13 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
        }
    }
 
+}
+
+@Composable
+fun AffImage(weatherViewModel: WeatherViewModel = viewModel()) {
+    val weatherUiState = weatherViewModel.uiState.collectAsState()
+    AsyncImage(
+        model = "https://openweathermap.org/img/wn/"+weatherUiState.value.weather[0].icon+".png",
+        contentDescription = null,
+    )
 }

@@ -69,6 +69,7 @@ class WeatherViewModel: ViewModel() {
         _city.value = ""
     }
 
+
     fun Weather(city: String){
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create()).build()

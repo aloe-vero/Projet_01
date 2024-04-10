@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.coil.compose)
     implementation (libs.squareup.retrofit)
     implementation (libs.converter.scalars)
     implementation (libs.converter.gson)
