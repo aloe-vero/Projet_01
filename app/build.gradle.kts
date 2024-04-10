@@ -51,6 +51,10 @@ android {
 
 dependencies {
 
+    implementation (libs.squareup.retrofit)
+    implementation (libs.converter.scalars)
+    implementation (libs.converter.gson)
+    implementation (libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

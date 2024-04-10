@@ -33,6 +33,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projet_01.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,6 +66,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()){
                     modifier = Modifier.clickable {
                         Log.d(ContentValues.TAG, "button clicked")
                         Log.i("data: ",weatherViewModel.getCity())
+                        weatherViewModel.Weather( weatherViewModel.getCity())
                     }
                 )
             },
@@ -105,7 +109,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()){
                 onDismissRequest = { weatherViewModel.updateExpanded(expanded = false)
                 },
                 //modifier couleur
-                Modifier.background(color = Color.Blue)
+                Modifier.background(color = Color.White)
             ) {
                 weatherViewModel.getCities().forEach { selectionOption ->
                     DropdownMenuItem(
@@ -113,6 +117,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()){
                         onClick = {
                             weatherViewModel.updateSelectedCity(selectionOption)
                             weatherViewModel.updateExpanded(expanded = false)
+                            weatherViewModel.Weather( weatherViewModel.getSelectedCity())
                         }
                     )
                 }
@@ -120,27 +125,27 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()){
         }
         Spacer(Modifier.height(60.dp))
         Text(
-            text = weatherUiState.value.currentDate,
+            text = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(Date()),
             style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(10.dp))
         Text(
-            text = weatherUiState.value.temperature,
+            text = weatherUiState.value.main.temp.toString(),
             style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(5.dp))
         Text(
-            text = weatherUiState.value.city,
+            text = weatherUiState.value.name,
             style = MaterialTheme.typography.displayMedium,
         )
         Spacer(Modifier.height(20.dp))
         Image(
-            painter = painterResource(weatherUiState.value.icon),
+            painter = painterResource(R.drawable.icon_peu_nuageux),
             contentDescription = "weather"
         )
         Spacer(Modifier.height(10.dp))
         Text(
-            text = weatherUiState.value.weather,
+            text = weatherUiState.value.weather[0].description,
             style = MaterialTheme.typography.displaySmall,
 
             )
