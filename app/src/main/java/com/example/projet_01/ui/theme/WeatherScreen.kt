@@ -172,7 +172,7 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
                painter = painterResource(R.drawable.icon_peu_nuageux),
                contentDescription = "weather"
            )
-           Spacer(Modifier.height(10.dp))
+           Spacer(Modifier.height(15.dp))
            Text(
                text = weatherUiState.value.weather[0].description,
                style = MaterialTheme.typography.displaySmall,
