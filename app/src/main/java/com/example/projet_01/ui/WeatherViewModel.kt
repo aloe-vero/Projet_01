@@ -1,8 +1,9 @@
-package com.example.projet_01.ui.theme
+package com.example.projet_01.ui
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.projet_01.R
 import com.example.projet_01.modele.Clouds
 import com.example.projet_01.modele.Coord
 import com.example.projet_01.modele.Main
@@ -37,6 +38,7 @@ class WeatherViewModel: ViewModel() {
     private var _selectedCity = mutableStateOf("")
     private var _expanded = mutableStateOf(false)
 
+
     fun updateCity(city: String){
         _city.value = city
     }
@@ -69,7 +71,9 @@ class WeatherViewModel: ViewModel() {
         _city.value = ""
     }
 
+fun getWeatherIcon(){
 
+}
     fun Weather(city: String){
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create()).build()
