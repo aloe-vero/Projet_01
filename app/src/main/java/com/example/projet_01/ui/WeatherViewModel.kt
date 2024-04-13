@@ -3,7 +3,6 @@ package com.example.projet_01.ui
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.projet_01.R
 import com.example.projet_01.modele.Clouds
 import com.example.projet_01.modele.Coord
 import com.example.projet_01.modele.Main
@@ -71,10 +70,11 @@ class WeatherViewModel: ViewModel() {
         _city.value = ""
     }
 
-fun getWeatherIcon(){
+    fun onloadCity(){
+        updateSelectedCity("Montreal")
+    }
 
-}
-    fun Weather(city: String){
+    fun weather(city: String){
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service : WeatherService = retrofit.create(WeatherService::class.java)
@@ -86,7 +86,7 @@ fun getWeatherIcon(){
                 call: Call<WeatherData>,
                 reponse: Response<WeatherData>
             ){
-                var data = reponse.body() as WeatherData
+                val data = reponse.body() as WeatherData
                 _uiState.update {
                     currentState ->
                     currentState.copy(
