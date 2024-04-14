@@ -1,5 +1,6 @@
 package com.example.projet_01.ui
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -33,7 +34,7 @@ class WeatherViewModel: ViewModel() {
     val uiState: StateFlow<WeatherData> = _uiState.asStateFlow()
 
     private var _city = mutableStateOf("")
-    private var _cities = listOf("Montréal", "Laval", "Québec", "Position actuelle")
+    private var _cities = listOf("Montréal", "Laval", "Québec")
     private var _selectedCity = mutableStateOf("")
     private var _expanded = mutableStateOf(false)
 
@@ -70,10 +71,6 @@ class WeatherViewModel: ViewModel() {
         _city.value = ""
     }
 
-    fun onloadCity(){
-        updateSelectedCity("Montreal")
-    }
-
     fun weather(city: String){
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create()).build()
@@ -86,15 +83,21 @@ class WeatherViewModel: ViewModel() {
                 call: Call<WeatherData>,
                 reponse: Response<WeatherData>
             ){
-                val data = reponse.body() as WeatherData
-                _uiState.update {
-                    currentState ->
-                    currentState.copy(
-                        name = data.name,
-                        main = data.main,
-                        weather = data.weather
-                    )
+                try {
+                    val data = reponse.body() as WeatherData
+                    _uiState.update {
+                            currentState ->
+                        currentState.copy(
+                            name = data.name,
+                            main = data.main,
+                            weather = data.weather
+                        )
+                    }
+                }catch(e : NullPointerException){
+                    Log.d(TAG, "Error COMPLETE FAILURE")
+
                 }
+
             }
             override fun onFailure(call: Call<WeatherData>, t: Throwable) {
                 Log.e("Error COMPLETE FAILURE", t.stackTraceToString())

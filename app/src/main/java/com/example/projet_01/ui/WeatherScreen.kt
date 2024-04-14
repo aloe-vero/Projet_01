@@ -50,8 +50,7 @@ import java.util.Locale
 
 
 @Composable
-fun WeatherScreen(weatherViewModel: WeatherViewModel = viewModel()){
-    val weatherUiState = weatherViewModel.uiState.collectAsState()
+fun WeatherScreen(){
     OnloadCity()
     ImageDeFond()
     Column(modifier = Modifier
@@ -249,7 +248,7 @@ fun ImageDeFond(weatherViewModel: WeatherViewModel = viewModel()){
         modifier = with (Modifier){
             fillMaxSize()
                 .paint(
-                    // Replace with your image id
+                    // Replace with your image ids
                     painterResource(backgroundImage),
                     contentScale = ContentScale.FillBounds)
 
@@ -257,14 +256,6 @@ fun ImageDeFond(weatherViewModel: WeatherViewModel = viewModel()){
 }
 @Composable
 fun OnloadCity(weatherViewModel: WeatherViewModel = viewModel()){
-    weatherViewModel.onloadCity()
-    weatherViewModel.weather( weatherViewModel.getSelectedCity());
-}
-@Composable
-fun AffImage(weatherViewModel: WeatherViewModel = viewModel()) {
-    val weatherUiState = weatherViewModel.uiState.collectAsState()
-    AsyncImage(
-        model = "https://openweathermap.org/img/wn/"+weatherUiState.value.weather[0].icon+".png",
-        contentDescription = null,
-    )
+    weatherViewModel.weather( "Montréal")
+    weatherViewModel.updateSelectedCity("Montréal")
 }
