@@ -1,8 +1,8 @@
 package com.example.projet_01.ui
 
-import android.content.ContentValues.TAG
+
 import android.util.Log
-import androidx.compose.runtime.mutableIntStateOf
+
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.projet_01.R
@@ -156,14 +156,7 @@ class WeatherViewModel: ViewModel() {
                     }
                 }catch(e : NullPointerException){
                     updateError(true)
-                    /*_uiState.update {
-                        currentState ->
-                        currentState.copy(
-                            name = "",
-                            main = Main(0.0, 0.0, 0.0, 0.0, 0, 0),
-                            weather = listOf(Weather(0, "", "", ""))
-                        )
-                    }*/
+
                 }
 
             }

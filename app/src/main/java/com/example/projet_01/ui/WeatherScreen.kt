@@ -1,7 +1,6 @@
 package com.example.projet_01.ui
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
+
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,13 +40,13 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.LineBreak
+
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.projet_01.R
+
 import java.text.SimpleDateFormat
-import java.time.format.TextStyle
+
 import java.util.Date
 import java.util.Locale
 
@@ -96,7 +95,6 @@ fun BarreDeRecherche(weatherViewModel: WeatherViewModel = viewModel()){
                     imageVector = Icons.Filled.Search,
                     contentDescription = "search",
                     modifier = Modifier.clickable {
-                        Log.d(ContentValues.TAG, "button clicked")
                         Log.i("data: ",weatherViewModel.getCity())
                         weatherViewModel.weather( weatherViewModel.getCity())
                         weatherViewModel.resetSelectedCity()
