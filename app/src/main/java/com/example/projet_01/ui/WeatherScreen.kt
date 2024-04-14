@@ -167,6 +167,7 @@ fun ListeDeroulante(weatherViewModel: WeatherViewModel = viewModel()){
                         weatherViewModel.updateExpanded(expanded = false)
                         weatherViewModel.weather( weatherViewModel.getSelectedCity())
                         weatherViewModel.resetCity()
+                        weatherViewModel.updateError(false)
                     }
                 )
             }
