@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -42,7 +43,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import com.example.projet_01.R
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -58,7 +58,7 @@ fun WeatherScreen(){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,){
         Spacer(Modifier.height(20.dp))
-        BarDeRecherche()
+        BarreDeRecherche()
         Spacer(Modifier.height(30.dp))
         ListeDeroulante()
         Spacer(Modifier.height(30.dp))
@@ -71,42 +71,59 @@ fun WeatherScreen(){
 }
 
 @Composable
-fun BarDeRecherche(weatherViewModel: WeatherViewModel = viewModel()){
-    TextField(
-        modifier = Modifier.width(350.dp),
-        value = weatherViewModel.getCity(),
-        onValueChange = {weatherViewModel.updateCity(it)},
-        label = { Text(text = "Ville: ",
-            style = MaterialTheme.typography.bodyMedium,)
-        },
-        shape = RoundedCornerShape(20.dp),
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Filled.Search,
-                contentDescription = "search",
-                modifier = Modifier.clickable {
-                    Log.d(ContentValues.TAG, "button clicked")
-                    Log.i("data: ",weatherViewModel.getCity())
-                    weatherViewModel.weather( weatherViewModel.getCity())
+fun BarreDeRecherche(weatherViewModel: WeatherViewModel = viewModel()){
+    Column {
+        TextField(
+            modifier = Modifier.width(350.dp),
+            value = weatherViewModel.getCity(),
+            onValueChange = {
+                weatherViewModel.updateCity(it)
+                weatherViewModel.updateError(false)
+            },
+            label = { Text(text = "Ville: ",
+                style = MaterialTheme.typography.bodyMedium,)
+            },
+            shape = RoundedCornerShape(20.dp),
+            colors = TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "search",
+                    modifier = Modifier.clickable {
+                        Log.d(ContentValues.TAG, "button clicked")
+                        Log.i("data: ",weatherViewModel.getCity())
+                        weatherViewModel.weather( weatherViewModel.getCity())
 
+                    }
+                )
+            },
+            trailingIcon={
+                if(weatherViewModel.getError()){
+                    Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colorScheme.error)
+                }else{
+                    Icon(
+                        Icons.Default.Clear,
+                        contentDescription = "clear text",
+                        modifier = Modifier.clickable {
+                            weatherViewModel.resetCity()
+                        }
+                    )
                 }
-            )
-        },
-        trailingIcon={
-            Icon(
-                Icons.Default.Clear,
-                contentDescription = "clear text",
-                modifier = Modifier.clickable {
-                    weatherViewModel.resetCity()
-                }
+            }
+        )
+        if(weatherViewModel.getError()){
+            Text(
+                text = "Ville introuvable",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.displaySmall,
+                modifier = Modifier.padding(start = 16.dp)
             )
         }
+    }
 
-    )
 }
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -259,3 +276,4 @@ fun OnloadCity(weatherViewModel: WeatherViewModel = viewModel()){
     weatherViewModel.weather( "Montréal")
     weatherViewModel.updateSelectedCity("Montréal")
 }
+

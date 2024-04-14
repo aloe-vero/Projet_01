@@ -37,6 +37,7 @@ class WeatherViewModel: ViewModel() {
     private var _cities = listOf("Montréal", "Laval", "Québec")
     private var _selectedCity = mutableStateOf("")
     private var _expanded = mutableStateOf(false)
+    private var _error = mutableStateOf(false)
 
 
     fun updateCity(city: String){
@@ -49,6 +50,10 @@ class WeatherViewModel: ViewModel() {
 
     fun updateSelectedCity(selectedCity: String){
         _selectedCity.value = selectedCity
+    }
+
+    fun updateError(error: Boolean){
+        _error.value = error
     }
 
     fun getCity():String{
@@ -65,6 +70,10 @@ class WeatherViewModel: ViewModel() {
 
     fun getExpanded(): Boolean{
         return _expanded.value
+    }
+
+    fun getError(): Boolean{
+        return _error.value
     }
 
     fun resetCity(){
@@ -94,6 +103,7 @@ class WeatherViewModel: ViewModel() {
                         )
                     }
                 }catch(e : NullPointerException){
+                    updateError(true)
                     Log.d(TAG, "Error COMPLETE FAILURE")
 
                 }

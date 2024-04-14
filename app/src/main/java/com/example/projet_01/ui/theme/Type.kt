@@ -26,7 +26,7 @@ val Typography = Typography(
  displaySmall = TextStyle(
  fontFamily = Karla,
 fontWeight = FontWeight.Bold,
- fontSize = 20.sp
+ fontSize = 15.sp
  ),
  bodyLarge = TextStyle(
  fontFamily = Karla,
