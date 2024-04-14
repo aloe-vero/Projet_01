@@ -125,7 +125,7 @@ class WeatherViewModel: ViewModel() {
             "13n"-> R.drawable._nuit
             "50d"-> R.drawable._neige
             "50n"-> R.drawable._nuit
-            else -> R.drawable.ic_launcher_background
+            else -> R.drawable._neige
         }
     }
     fun weather(city: String){
