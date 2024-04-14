@@ -175,27 +175,7 @@ fun ListeDeroulante(weatherViewModel: WeatherViewModel = viewModel()){
 @Composable
 fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
     val weatherUiState = weatherViewModel.uiState.collectAsState()
-    val icon =when(weatherUiState.value.weather[0].icon){
-        "01d"-> R.drawable._01d
-        "01n" -> R.drawable._01n
-        "02d"-> R.drawable._02d
-        "02n"-> R.drawable._02n
-        "03d"-> R.drawable._03d
-        "03n"-> R.drawable._03n
-        "04d"-> R.drawable._04d
-        "04n"-> R.drawable._04n
-        "09d"-> R.drawable._09d
-        "09n"-> R.drawable._09n
-        "10d"-> R.drawable._10d
-        "10n"-> R.drawable._10n
-        "11d"-> R.drawable._11d
-        "11n"-> R.drawable._11n
-        "13d"-> R.drawable._13d
-        "13n"-> R.drawable._13n
-        "50d"-> R.drawable._50d
-        "50n"-> R.drawable._50n
-        else -> R.drawable.unknown
-    }
+    val iconValue = weatherUiState.value.weather[0].icon
    Row(modifier = Modifier
        .width(350.dp)
        .padding(25.dp)) {
@@ -230,7 +210,7 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
 
        }
    }
-    Image(painter = painterResource(icon), contentDescription ="meteo image",Modifier.size(200.dp) )
+    Image(painter = painterResource(weatherViewModel.getIconCode(iconValue)), contentDescription ="meteo image",Modifier.size(200.dp) )
     Text(
         text = weatherUiState.value.weather[0].description,
         style = MaterialTheme.typography.displaySmall,
@@ -240,37 +220,20 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
 @Composable
 fun ImageDeFond(weatherViewModel: WeatherViewModel = viewModel()){
     val weatherUiState = weatherViewModel.uiState.collectAsState()
-    val backgroundImage =when(weatherUiState.value.weather[0].icon){
-        "01d"-> R.drawable._jour
-        "01n" -> R.drawable._nuit
-        "02d"-> R.drawable._jour
-        "02n"-> R.drawable._jour
-        "03d"-> R.drawable._jour
-        "03n"-> R.drawable._nuit
-        "04d"-> R.drawable._pluie
-        "04n"-> R.drawable._nuit
-        "09d"-> R.drawable._pluie
-        "09n"-> R.drawable._nuit
-        "10d"-> R.drawable._orage
-        "10n"-> R.drawable._orage
-        "11d"-> R.drawable._orage
-        "11n"-> R.drawable._orage
-        "13d"-> R.drawable._neige
-        "13n"-> R.drawable._nuit
-        "50d"-> R.drawable._neige
-        "50n"-> R.drawable._nuit
-        else -> R.drawable.ic_launcher_background
-    }
+    val iconValue = weatherUiState.value.weather[0].icon
     Box(
         modifier = with (Modifier){
             fillMaxSize()
                 .paint(
-                    // Replace with your image ids
-                    painterResource(backgroundImage),
+
+                    painterResource(weatherViewModel.getBackground(iconValue)),
                     contentScale = ContentScale.FillBounds)
 
         })
 }
+
+
+
 @Composable
 fun OnloadCity(weatherViewModel: WeatherViewModel = viewModel()){
     weatherViewModel.weather( "Montréal")
