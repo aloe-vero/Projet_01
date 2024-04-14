@@ -81,6 +81,11 @@ class WeatherViewModel: ViewModel() {
     fun resetCity(){
         _city.value = ""
     }
+
+    fun resetSelectedCity(){
+        _selectedCity.value = ""
+    }
+
     fun getIconCode(iconCode: String): Int {
         return when (iconCode) {
             "01d" -> R.drawable._01d
@@ -104,7 +109,6 @@ class WeatherViewModel: ViewModel() {
             else -> R.drawable.unknown
         }
     }
-
     fun getBackground(iconCode: String): Int {
         return when(iconCode){
             "01d"-> R.drawable._jour
@@ -152,8 +156,14 @@ class WeatherViewModel: ViewModel() {
                     }
                 }catch(e : NullPointerException){
                     updateError(true)
-                    Log.d(TAG, "Error COMPLETE FAILURE")
-
+                    /*_uiState.update {
+                        currentState ->
+                        currentState.copy(
+                            name = "",
+                            main = Main(0.0, 0.0, 0.0, 0.0, 0, 0),
+                            weather = listOf(Weather(0, "", "", ""))
+                        )
+                    }*/
                 }
 
             }

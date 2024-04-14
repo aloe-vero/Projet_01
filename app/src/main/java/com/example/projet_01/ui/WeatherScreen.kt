@@ -1,6 +1,7 @@
 package com.example.projet_01.ui
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,11 +41,13 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projet_01.R
 import java.text.SimpleDateFormat
+import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
 
@@ -96,6 +99,7 @@ fun BarreDeRecherche(weatherViewModel: WeatherViewModel = viewModel()){
                         Log.d(ContentValues.TAG, "button clicked")
                         Log.i("data: ",weatherViewModel.getCity())
                         weatherViewModel.weather( weatherViewModel.getCity())
+                        weatherViewModel.resetSelectedCity()
 
                     }
                 )
@@ -164,6 +168,7 @@ fun ListeDeroulante(weatherViewModel: WeatherViewModel = viewModel()){
                         weatherViewModel.updateSelectedCity(selectionOption)
                         weatherViewModel.updateExpanded(expanded = false)
                         weatherViewModel.weather( weatherViewModel.getSelectedCity())
+                        weatherViewModel.resetCity()
                     }
                 )
             }
@@ -185,6 +190,7 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
            Text(
                text = weatherUiState.value.name,
                style = MaterialTheme.typography.displayMedium,
+               modifier = Modifier.width(190.dp)
            )
            Text(
                text = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH).format(Date()),
@@ -192,6 +198,7 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
            )
 
        }
+       Spacer(Modifier.width(6.dp))
        Column(modifier = Modifier.weight(1f),verticalArrangement = Arrangement.Center,
            horizontalAlignment = Alignment.End,) {
            Card(modifier = Modifier
@@ -204,16 +211,17 @@ fun AffichageWeather(weatherViewModel: WeatherViewModel = viewModel()){
                        .fillMaxWidth(),
                    text = weatherUiState.value.main.temp.toString() + "°C",
                    style = MaterialTheme.typography.displayMedium,
-                   textAlign = TextAlign.Justify,
+                   textAlign = TextAlign.Center,
                )
            }
 
        }
    }
     Image(painter = painterResource(weatherViewModel.getIconCode(iconValue)), contentDescription ="meteo image",Modifier.size(200.dp) )
+    Spacer(Modifier.height(35.dp))
     Text(
         text = weatherUiState.value.weather[0].description,
-        style = MaterialTheme.typography.displaySmall,
+        style = MaterialTheme.typography.displayMedium,
 
         )
 }
